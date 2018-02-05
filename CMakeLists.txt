@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(Raycaster)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 set(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake)
 
 find_package(SDL2 REQUIRED)
