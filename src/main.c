@@ -43,7 +43,7 @@ bool init()
 
 bool loadMedia()
 {
-	gHelloWorld = SDL_LoadBMP("hello-world.bmp");
+	gHelloWorld = SDL_LoadBMP("assets/hello-world.bmp");
 	if (gHelloWorld == NULL)
 	{
 		SDL_ERR("Unable to load image!");
