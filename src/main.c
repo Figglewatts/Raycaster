@@ -3,44 +3,10 @@
 #include <string.h>
 #include <stdbool.h>
 
+#include "Window.h"
+
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
-
-#define SDL_ERR(ERR_MSG)    do                                          \
-                            {                                           \
-                                char buf[256];                          \
-                                snprintf(buf, sizeof buf, "%s%s",       \
-                                ERR_MSG, " | SDL_Error: %s\n");         \
-                                fprintf(stderr, buf, SDL_GetError());   \
-                            } while(0)
-
-bool sdl_init(SDL_Window **window, SDL_Surface **surface)
-{
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
-        SDL_ERR("SDL could not init!");
-        return false;
-    }
-    else
-    {
-        *window = SDL_CreateWindow("SDL Tutorial", 
-            SDL_WINDOWPOS_UNDEFINED, 
-            SDL_WINDOWPOS_UNDEFINED, 
-            SCREEN_WIDTH, SCREEN_HEIGHT, 
-            SDL_WINDOW_SHOWN);
-        if (*window == NULL)
-        {
-            SDL_ERR("Window could not be created!");
-            return false;
-        }
-        else
-        {
-            *surface = SDL_GetWindowSurface(*window);
-        }
-    }
-
-    return true;
-}
 
 bool load_media(SDL_Surface **media, const char* path)
 {
@@ -53,24 +19,15 @@ bool load_media(SDL_Surface **media, const char* path)
     return true;
 }
 
-void sdl_destroy(SDL_Window **window, SDL_Surface **media)
+int main(int argc, char** argv)
 {
-    SDL_FreeSurface(*media);
-    *media = NULL;
-    
-    SDL_DestroyWindow(*window);
-    *window = NULL;
-
-    SDL_Quit();
-}
-
-int main(int argc, char* args[])
-{
-    SDL_Window *window = NULL;
-    SDL_Surface *surface = NULL;
+    SDLWindow window = {.title="Raycaster", .width=SCREEN_WIDTH, 
+        .height=SCREEN_HEIGHT};
     SDL_Surface *hello_world = NULL;
     
-    if (!sdl_init(&window, &surface)) return -1;
+    if (!sdl_init()) return -1;
+
+    if (!init_window(&window)) return -1;
 
     if (!load_media(&hello_world, "assets/hello-world.bmp")) return -1;
 
@@ -87,12 +44,13 @@ int main(int argc, char* args[])
             }
         }
 
-        SDL_BlitSurface(hello_world, NULL, surface, NULL);
+        SDL_BlitSurface(hello_world, NULL, window.windowSurface, NULL);
 
-        SDL_UpdateWindowSurface(window);
+        SDL_UpdateWindowSurface(window.window);
     }
 
-    sdl_destroy(&window, &hello_world);
+    SDL_FreeSurface(hello_world);
+    sdl_destroy(&window);
     
     return 0;
 };
