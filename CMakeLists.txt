@@ -16,3 +16,4 @@ file(COPY "assets" DESTINATION ${CMAKE_BINARY_DIR})
 
 add_executable(Raycaster ${SOURCES})
 target_link_libraries(Raycaster ${SDL2_LIBRARY})
+target_link_libraries(Raycaster m)

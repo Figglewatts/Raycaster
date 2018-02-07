@@ -15,17 +15,16 @@ typedef struct
 {
     SDL_Window *window;
     SDL_Surface *windowSurface;
+    SDL_Renderer *renderer;
     const char* title;
     const int width, height;
 } SDLWindow;
 
 bool init_window(SDLWindow *window)
 {
-    window->window = SDL_CreateWindow(window->title,
-        SDL_WINDOWPOS_UNDEFINED,
-        SDL_WINDOWPOS_UNDEFINED,
-        window->width, window->height,
-        SDL_WINDOW_SHOWN);
+    SDL_CreateWindowAndRenderer(window->width, window->height,
+        0, &window->window, &window->renderer);
+    SDL_SetWindowTitle(window->window, window->title);
     if (window->window == NULL)
     {
         SDL_ERR("Window could not be created!");
@@ -47,6 +46,9 @@ bool sdl_init()
 
 void sdl_destroy(SDLWindow *window)
 {
+    SDL_DestroyRenderer(window->renderer);
+    window->renderer = NULL;
+    
     SDL_DestroyWindow(window->window);
     window->window = NULL;
 
