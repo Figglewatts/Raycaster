@@ -13,6 +13,11 @@ F16 create_f16(I16 mag, U16 frac)
 	return (mag << SHIFT_AMT_F16) + frac;
 }
 
+F16 create_f16f(double f)
+{
+	return (I16)(f * (1 << SHIFT_AMT_F16));
+}
+
 F16 add_f16(F16 a, F16 b)
 {
 	return a + b;

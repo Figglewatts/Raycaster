@@ -13,6 +13,11 @@ F32 create_f32(I32 mag, U32 frac)
 	return (mag << SHIFT_AMT_F32) + frac;
 }
 
+F32 create_f32f(double f)
+{
+	return (I32)(f * (1 << SHIFT_AMT_F32));
+}
+
 F32 add_f32(F32 a, F32 b)
 {
 	return a + b;
