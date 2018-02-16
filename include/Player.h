@@ -1,12 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Vectors.h"
-
 typedef struct Player {
-    Vec2 pos;
-    Vec2 dir;
-    Vec2 plane;
+    double posX, posY;
+    double dirX, dirY;
+    double planeX, planeY;
 } Player;
 
 #endif // PLAYER_H

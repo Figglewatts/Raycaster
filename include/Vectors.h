@@ -19,84 +19,84 @@ typedef struct Vec3
 
 Vec2 unit_vec2()
 {
-	return { .x=create_f16(1, 0), .y=create_f16(1, 0) };
+	return (Vec2) { .x=create_f16(1, 0), .y=create_f16(1, 0) };
 }
 
 Vec3 unit_vec3()
 {
-	return { .x=create_f16(1, 0),
+	return (Vec3) { .x=create_f16(1, 0),
 		.y=create_f16(1, 0),
 		.z=create_f16(1, 0)};
 }
 
 Vec2 negate_vec2(Vec2 v)
 {
-	return { .x=-v.x, .y=-v.y };
+	return (Vec2) { .x=-v.x, .y=-v.y };
 }
 
 Vec3 negate_vec3(Vec3 v)
 {
-	return { .x=-v.x, .y=-v.y, .z=-v.z };
+	return (Vec3) { .x=-v.x, .y=-v.y, .z=-v.z };
 }
 
 Vec2 create_vec2f(F16 x, F16 y)
 {
-	return { .x=x, .y=y };
+	return (Vec2) { .x=x, .y=y };
 }
 
 Vec3 create_vec3f(F16 x, F16 y, F16 z)
 {
-	return { .x=x, .y=y, .z=z };
+	return (Vec3) { .x=x, .y=y, .z=z };
 }
 
 Vec2 create_vec2i(I16 x, I16 y)
 {
-	return { .x=create_f16(x, 0), .y=create_f16(y, 0) };
+	return (Vec2) { .x=create_f16(x, 0), .y=create_f16(y, 0) };
 }
 
 Vec3 create_vec3i(I16 x, I16 y, I16 z)
 {
-	return { .x=create_f16(x, 0), .y=create_f16(y, 0), .z=create_f16(z, 0) };
+	return (Vec3) { .x=create_f16(x, 0), .y=create_f16(y, 0), .z=create_f16(z, 0) };
 }
 
 Vec2 add_vec2(Vec2 a, Vec2 b)
 {
-	return { .x=a.x + b.x, .y=a.y + b.y };
+	return (Vec2) { .x=a.x + b.x, .y=a.y + b.y };
 }
 
 Vec3 add_vec3(Vec3 a, Vec3 b)
 {
-	return { .x=a.x + b.x, .y=a.y + b.y, .z=a.z + b.z };
+	return (Vec3) { .x=a.x + b.x, .y=a.y + b.y, .z=a.z + b.z };
 }
 
 Vec2 sub_vec2(Vec2 a, Vec2 b)
 {
-	return add_vec2(a, {.x=-b.x, .y=-b.y});
+	return add_vec2(a, (Vec2) {.x=-b.x, .y=-b.y});
 }
 
 Vec3 sub_vec3(Vec3 a, Vec3 b)
 {
-	return add_vec3(a, {.x=-b.x, .y=-b.y, .z=-b.z});
+	return add_vec3(a, (Vec3) {.x=-b.x, .y=-b.y, .z=-b.z});
 }
 
 Vec2 mul_vec2(Vec2 a, F16 b)
 {
-	return {.x=mul_f16(a.x, b), .y=mul_f16(a.y, b)};
+	return (Vec2) {.x=mul_f16(a.x, b), .y=mul_f16(a.y, b)};
 }
 
 Vec3 mul_vec3(Vec3 a, F16 b)
 {
-	return {.x=mul_f16(a.x, b), .y=mul_f16(a.y, b), .z=mul_f16(a.z, b)};
+	return (Vec3) {.x=mul_f16(a.x, b), .y=mul_f16(a.y, b), .z=mul_f16(a.z, b)};
 }
 
 Vec2 div_vec2(Vec2 a, F16 b)
 {
-	return {.x=div_f16(a.x, b), .y=div_f16(a.y, b)};
+	return (Vec2) {.x=div_f16(a.x, b), .y=div_f16(a.y, b)};
 }
 
 Vec3 div_vec3(Vec3 a, F16 b)
 {
-	return {.x=div_f16(a.x, b), .y=div_f16(a.y, b), .z=div_f16(a.z, b)};
+	return (Vec3) {.x=div_f16(a.x, b), .y=div_f16(a.y, b), .z=div_f16(a.z, b)};
 }
 
 F16 dot_vec2(Vec2 a, Vec2 b)

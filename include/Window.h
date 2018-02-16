@@ -3,6 +3,8 @@
 
 #include <SDL2/SDL.h>
 
+#include <stdbool.h>
+
 #define SDL_ERR(ERR_MSG)    do                                          \
                             {                                           \
                                 char buf[256];                          \
@@ -11,7 +13,7 @@
                                 fprintf(stderr, buf, SDL_GetError());   \
                             } while(0)
 
-typedef struct 
+typedef struct SDLWindow
 {
     SDL_Window *window;
     SDL_Surface *windowSurface;
@@ -20,39 +22,10 @@ typedef struct
     const int width, height;
 } SDLWindow;
 
-bool init_window(SDLWindow *window)
-{
-    SDL_CreateWindowAndRenderer(window->width, window->height,
-        0, &window->window, &window->renderer);
-    SDL_SetWindowTitle(window->window, window->title);
-    if (window->window == NULL)
-    {
-        SDL_ERR("Window could not be created!");
-        return false;
-    }
-    window->windowSurface = SDL_GetWindowSurface(window->window);
-    return true;
-}
+bool init_window(SDLWindow *window);
 
-bool sdl_init()
-{
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
-    {
-        SDL_ERR("SDL could not init!");
-        return false;
-    }
-    return true;
-}
+bool sdl_init();
 
-void sdl_destroy(SDLWindow *window)
-{
-    SDL_DestroyRenderer(window->renderer);
-    window->renderer = NULL;
-    
-    SDL_DestroyWindow(window->window);
-    window->window = NULL;
-
-    SDL_Quit();
-}
+void sdl_destroy(SDLWindow *window);
 
 #endif // WINDOW_H

@@ -36,6 +36,8 @@ F16 mul_f16(F16 a, F16 b)
 
 F16 div_f16(F16 a, F16 b)
 {
+	if (b == 0) return a;
+	
 	I32 x = (I32)a << SHIFT_AMT_F16;
 	return x / b;
 }
