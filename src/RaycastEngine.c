@@ -6,32 +6,32 @@
 #include "Window.h"
 #include <stdio.h>
 
-int worldMap[mapWidth][mapHeight] =
+int worldMap[mapWidth][mapHeight]=
 {
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,2,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,3,0,0,0,3,0,0,0,1},
-  {1,0,0,0,0,0,2,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,5,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,0,0,0,0,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,4,4,4,4,4,4,4,4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-  {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+  {8,8,8,8,8,8,8,8,8,8,8,4,4,6,4,4,6,4,6,4,4,4,6,4},
+  {8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,0,0,0,0,0,0,4},
+  {8,0,3,3,0,0,0,0,0,8,8,4,0,0,0,0,0,0,0,0,0,0,0,6},
+  {8,0,0,3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,6},
+  {8,0,3,3,0,0,0,0,0,8,8,4,0,0,0,0,0,0,0,0,0,0,0,4},
+  {8,0,0,0,0,0,0,0,0,0,8,4,0,0,0,0,0,6,6,6,0,6,4,6},
+  {8,8,8,8,0,8,8,8,8,8,8,4,4,4,4,4,4,6,0,0,0,0,0,6},
+  {7,7,7,7,0,7,7,7,7,0,8,0,8,0,8,0,8,4,0,4,0,6,0,6},
+  {7,7,0,0,0,0,0,0,7,8,0,8,0,8,0,8,8,6,0,0,0,0,0,6},
+  {7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,6,0,0,0,0,0,4},
+  {7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,6,0,6,0,6,0,6},
+  {7,7,0,0,0,0,0,0,7,8,0,8,0,8,0,8,8,6,4,6,0,6,6,6},
+  {7,7,7,7,0,7,7,7,7,8,8,4,0,6,8,4,8,3,3,3,0,3,3,3},
+  {2,2,2,2,0,2,2,2,2,4,6,4,0,0,6,0,6,3,0,0,0,0,0,3},
+  {2,2,0,0,0,0,0,2,2,4,0,0,0,0,0,0,4,3,0,0,0,0,0,3},
+  {2,0,0,0,0,0,0,0,2,4,0,0,0,0,0,0,4,3,0,0,0,0,0,3},
+  {1,0,0,0,0,0,0,0,1,4,4,4,4,4,6,0,6,3,3,0,0,0,3,3},
+  {2,0,0,0,0,0,0,0,2,2,2,1,2,2,2,6,6,0,0,5,0,5,0,5},
+  {2,2,0,0,0,0,0,2,2,2,0,0,0,2,2,0,5,0,5,0,0,0,5,5},
+  {2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,5,0,5,0,5,0,5,0,5},
+  {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,5},
+  {2,0,0,0,0,0,0,0,2,0,0,0,0,0,2,5,0,5,0,5,0,5,0,5},
+  {2,2,0,0,0,0,0,2,2,2,0,0,0,2,2,0,5,0,5,0,0,0,5,5},
+  {2,2,2,2,1,2,2,2,2,2,2,1,2,2,2,5,5,5,5,5,5,5,5,5}
 };
 
 uint32_t textures[MAX_TEXTURES][texWidth * texHeight] = {};
@@ -92,14 +92,43 @@ void draw_scanline(uint32_t* framebuffer, int windowWidth, int windowHeight, Sca
         // make color darker for y-sides, R,G,B bytes div by 2 with shift and AND
         if (scanline->side == 1) color = (color >> 1) & 8355711;
         framebuffer[y * windowWidth + scanline->x] = color;
-        //printf("LINE %d: %d\n", scanline->x, texY);
     }
-    //printf("LINE: %d: %x\n", scanline->x, framebuffer[scanline->start * windowWidth + scanline->x]);
+}
+
+void draw_floor_ceiling(uint32_t* framebuffer, int windowWidth, int windowHeight, Scanline* scanline, FloorCast* floorCast, Player* player)
+{
+    // draw the floor from scanline end to bottom of screen
+    for (int y = scanline->end + 1; y < windowHeight; y++)
+    {
+        // this calculation is an excellent candidate for a lookup table
+        floorCast->currentDist = windowHeight / (2.0 * y - windowHeight);
+
+        float weight = (floorCast->currentDist - floorCast->distPlayer) 
+            / (floorCast->distWall - floorCast->distPlayer);
+
+        float currentFloorX = weight * floorCast->floorXWall + (1.0 - weight) * player->posX;
+        float currentFloorY = weight * floorCast->floorYWall + (1.0 - weight) * player->posY;
+
+        int floorTexX, floorTexY;
+        floorTexX = (int)(currentFloorX * texWidth) % texWidth;
+        floorTexY = (int)(currentFloorY * texHeight) % texHeight;
+
+        uint32_t floor_pixel = textures[FLOOR_TEXTURE][texWidth * floorTexY + floorTexX];
+        uint32_t ceil_pixel = (textures[CEILING_TEXTURE][texWidth * floorTexY + floorTexX] >> 1) & 8355711;
+
+        float dist = scanline->distance * weight;
+        apply_fog(&floor_pixel, dist);
+        apply_fog(&ceil_pixel, dist);
+
+        framebuffer[y * windowWidth + scanline->x] = floor_pixel;
+        framebuffer[(windowHeight - y) * windowWidth + scanline->x] = ceil_pixel;
+    }
 }
 
 void engine_raycast_player_view(Player* player, SDLWindow* window, uint32_t *framebuffer)
 {
 	Scanline currentScanline;
+    FloorCast currentFloorCast;
     for (int x = 0; x < window->width; x++)
     {
         currentScanline = EmptyScanline;
@@ -208,6 +237,40 @@ void engine_raycast_player_view(Player* player, SDLWindow* window, uint32_t *fra
         if (side == 1 && rayDirY < 0) currentScanline.texX = texWidth - currentScanline.texX - 1;
 
         draw_scanline(framebuffer, window->width, window->height, &currentScanline);
+
+        // begin floor casting
+        currentFloorCast = EmptyFloorCast;
+
+        // 4 different dirs possible
+        if (side == 0 && rayDirX > 0)
+        {
+            currentFloorCast.floorXWall = mapX;
+            currentFloorCast.floorYWall = mapY + wallX;
+        }
+        else if (side == 0 && rayDirX < 0)
+        {
+            currentFloorCast.floorXWall = mapX + 1.0;
+            currentFloorCast.floorYWall = mapY + wallX;
+        }
+        else if (side == 1 && rayDirY > 0)
+        {
+            currentFloorCast.floorXWall = mapX + wallX;
+            currentFloorCast.floorYWall = mapY;
+        }
+        else
+        {
+            currentFloorCast.floorXWall = mapX + wallX;
+            currentFloorCast.floorYWall = mapY + 1.0;
+        }
+
+        currentFloorCast.currentDist = 0.0;
+        currentFloorCast.distWall = perpWallDist;
+        currentFloorCast.distPlayer = 0.0;
+
+        // becomes < 0 on int overflow
+        if (currentScanline.end < 0) currentScanline.end = window->height; 
+
+        draw_floor_ceiling(framebuffer, window->width, window->height, &currentScanline, &currentFloorCast, player);
     }
 }
 
@@ -225,7 +288,6 @@ void set_texture(int texNum, unsigned char* image, int width, int height)
         color += (image[i+1] << 8);
         color += (image[i] << 16);
         color += 0xFF000000;
-        //color = 0xFF00000F;
         textures[texNum][i/4] = color;
     }
 }

@@ -109,12 +109,16 @@ int main(int argc, char** argv)
     unsigned char* wood = load_image("assets/wood.png", &width, &height);
     unsigned char* colorstone = load_image("assets/colorstone.png", &width, &height);
     unsigned char* mossy = load_image("assets/mossy.png", &width, &height);
+    unsigned char* eagle = load_image("assets/eagle.png", &width, &height);
+    unsigned char* purplestone = load_image("assets/purplestone.png", &width, &height);
     set_texture(0, greystone, width, height);
     set_texture(1, bluestone, width, height);
     set_texture(2, redbrick, width, height);
     set_texture(3, wood, width, height);
     set_texture(4, colorstone, width, height);
     set_texture(5, mossy, width, height);
+    set_texture(6, eagle, width, height);
+    set_texture(7, purplestone, width, height);
 
     SDL_Texture *screen = SDL_CreateTexture(window.renderer, SDL_PIXELFORMAT_ARGB8888, 
         SDL_TEXTUREACCESS_STREAMING, window.width, window.height);

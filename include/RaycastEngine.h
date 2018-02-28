@@ -9,10 +9,13 @@
 
 #define MAX_TEXTURES 8
 
-#define FOG_INCREMENT 2
-#define MAX_FOG_DIST 20
-#define MIN_FOG_DIST 3
-#define FOG_COLOR 0x0#
+#define FOG_INCREMENT 1
+#define MAX_FOG_DIST 11
+#define MIN_FOG_DIST 1
+#define FOG_COLOR 0x0
+
+#define FLOOR_TEXTURE 3
+#define CEILING_TEXTURE 0
 
 #include "Player.h"
 #include "Window.h"
@@ -29,7 +32,18 @@ typedef struct Scanline
 	float distance;
 } Scanline;
 
+typedef struct FloorCast
+{
+	float distWall;
+	float distPlayer;
+	float currentDist;
+	float floorXWall;
+	float floorYWall;
+} FloorCast;
+
 static const Scanline EmptyScanline;
+
+static const FloorCast EmptyFloorCast;
 
 struct Player;
 
