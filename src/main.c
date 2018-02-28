@@ -10,12 +10,14 @@
 #include "PlayerOperations.h"
 #include "RaycastEngine.h"
 #include "Input.h"
+#include "lodepng.h"
 
 #define FLOAT_ARITHMETIC
 #include "f16.h"
 
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+
 const double MOVE_SPEED = 2.0;
 const double ROT_SPEED = 3.0;
 
@@ -24,9 +26,34 @@ Player gPlayer;
 KeyboardState currentKeyboardState;
 KeyboardState lastKeyboardState;
 
+uint32_t framebuffer[SCREEN_HEIGHT * SCREEN_WIDTH];
+
+unsigned char* load_image(const char* filepath, 
+    unsigned* width, unsigned* height)
+{
+    unsigned char* image;
+    unsigned error;
+
+    error = lodepng_decode32_file(&image, width, height, filepath);
+    if(error)
+    {
+        printf("decoder error %u: %s\n", error, lodepng_error_text(error));
+    }
+
+    return image;
+}
+
+void clear_framebuffer(uint32_t* framebuffer)
+{
+    for (int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++)
+    {
+        framebuffer[i] = 0;
+    }
+}
+
 void update(SDLWindow *window, double dt)
 {
-    engine_raycast_player_view(&gPlayer, window);
+    engine_raycast_player_view(&gPlayer, window, framebuffer);
 }
 
 void handleInput(double dt)
@@ -75,10 +102,27 @@ int main(int argc, char** argv)
     gPlayer.planeX = 0;
     gPlayer.planeY = 0.66;
 
+    unsigned width, height;
+    unsigned char* greystone = load_image("assets/greystone.png", &width, &height);
+    unsigned char* bluestone = load_image("assets/bluestone.png", &width, &height);
+    unsigned char* redbrick = load_image("assets/redbrick.png", &width, &height);
+    unsigned char* wood = load_image("assets/wood.png", &width, &height);
+    unsigned char* colorstone = load_image("assets/colorstone.png", &width, &height);
+    unsigned char* mossy = load_image("assets/mossy.png", &width, &height);
+    set_texture(0, greystone, width, height);
+    set_texture(1, bluestone, width, height);
+    set_texture(2, redbrick, width, height);
+    set_texture(3, wood, width, height);
+    set_texture(4, colorstone, width, height);
+    set_texture(5, mossy, width, height);
+
+    SDL_Texture *screen = SDL_CreateTexture(window.renderer, SDL_PIXELFORMAT_ARGB8888, 
+        SDL_TEXTUREACCESS_STREAMING, window.width, window.height);
+
     while (!quit)
     {
         SDL_SetRenderDrawColor(window.renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
-        SDL_RenderClear(window.renderer);
+        clear_framebuffer(framebuffer);
 
         oldTime = t;
         t = clock();
@@ -98,11 +142,16 @@ int main(int argc, char** argv)
 
         update(&window, frameTime);
 
+        SDL_UpdateTexture(screen, NULL, framebuffer, window.width * sizeof(Uint32));
+
         lastKeyboardState = currentKeyboardState;
 
+        SDL_RenderClear(window.renderer);
+        SDL_RenderCopy(window.renderer, screen, NULL, NULL);
         SDL_RenderPresent(window.renderer);
     }
 
+    SDL_DestroyTexture(screen);
     sdl_destroy(&window);
     
     return 0;
